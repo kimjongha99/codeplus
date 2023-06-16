@@ -18,7 +18,7 @@ public class GCD {
    }
     public static void main(String[] args) {
 
-        System.out.println(gcd(10,15));
+        System.out.println(gcd(1,3));
         System.out.println(lcm(10,15));
     }
 }
