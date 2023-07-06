@@ -6,3 +6,15 @@
 Integer.parseInt()는 정수의 문자열 표현을 실제 int 값으로 구문 분석(변환)하는 데 사용되는 Java의 메서드입니다.
 문자열을 입력으로 사용하고 해당 정수 값을 반환합니다.
 
+
+
+1.bufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+을해서 스케너 같은데 버퍼는 문자열을 인식.
+
+버퍼는토큰화할수가없기때문에 StringTokenizer를 사용해 토큰화해줘야함.
+그대신 많은양의 데이터를읽을때 더빠르고 효율적
+2. StringTokenizer st; // 선언
+3. st = new StringTokenizer(br.readLine()); // 토큰화할준비.
+
+
+4. arr[i] = Integer.parseInt(st.nextToken());// st.nextToken() 으로 토큰화해서 저장.

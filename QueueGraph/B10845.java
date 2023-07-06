@@ -54,7 +54,7 @@ public class B10845 {
                 if (queue.isEmpty()) {
                     System.out.println("-1");
                 } else {
-                    System.out.println(queue.);
+                    System.out.println(queue.equals(2));
                 }
             }
         }
