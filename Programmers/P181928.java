@@ -30,4 +30,21 @@ public class P181928 {
         System.out.println(solution(arr));
 
     }
+
+    /*
+        https://school.programmers.co.kr/learn/courses/30/lessons/135807
+
+        숫자 카드 나누기
+
+         */
+    public static class P135807 {
+
+        public static void main(String[] args) {
+            int arrA[] = new int[]{10, 17};
+            int arrB[] = new int[]{10 ,20};
+
+            System.out.println();
+
+        }
+    }
 }
