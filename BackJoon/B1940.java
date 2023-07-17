@@ -1,7 +1,5 @@
 package BackJoon;
 
-
-import javax.imageio.IIOException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -39,12 +37,10 @@ public class B1940 {
             } else if (arr[start_idx]+ arr[end_idx]  > M) {
                 end_idx--;
             }
-            else{
-                count++;
+            else {count++;
                 start_idx++;
                 end_idx--;
             }
-
         }
         System.out.println(count);
         br.close();
