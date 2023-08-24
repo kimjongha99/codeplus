@@ -10,7 +10,9 @@ https://softeer.ai/practice/info.do?idx=1&eid=990
 public class S990 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int total = 0;
+        int totalhour = 0;
+        int totalmin = 0;
+
         for (int i = 0; i < 5; i++) {
             String StartTime = sc.next();
             String EndTime = sc.next();
@@ -20,11 +22,11 @@ public class S990 {
             int EndH = Integer.parseInt(EndTime.substring(0,2));
             int EndM = Integer.parseInt(EndTime.substring(3, 5));
 
-            total += (EndH-StartH)+(EndM-StartM);
-
+            totalhour += (EndH-StartH) ;
+            totalmin  +=(EndM-StartM);
         }
 
-        System.out.println(total*60);
+        System.out.println(totalhour*60+totalmin);
 
     }
 }
