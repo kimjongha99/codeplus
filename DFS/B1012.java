@@ -5,67 +5,80 @@ import java.util.StringTokenizer;
 
 /*
 유기농 배추
-
-
-https://www.acmicpc.net/problem/1072
+https://www.acmicpc.net/problem/1012
 
  */
 public class B1012 {
-    static  int MAX = 50+10;
-    static  boolean map [][];
-    static  boolean visited [][];
+        final  static  int MAX = 50+10;
+        static boolean [][] map ;
+        static  boolean [][] visited;
 
-    static  int T,M,N, K;
-    static  int answer =0;
-    static int[] dirX = {-1, 1, 0, 0};
-    static int[] dirY = {0, 0, -1, 1};
+        static  int N,M,K,T;
 
-       static void dfs(int k, int j) {  //k는 가로 j는 세로
-           visited[j][k] = true;
-           for (int i = 0; i < 4; i++) {
-           int  newY = j+ dirY[i];
-           int  newX = k+ dirX[i];
+        static  int [] dirY = {-1,1,0,0};
+        static  int [] dirX ={0,0,-1,1};
 
 
-           if(map[newY][newX]&&visited[newY][newX]==false)
-               dfs(newY, newX);
-           }
-           }
 
+        static  void  dfs(int y, int x){
+            visited[y][x] =true;
+            for (int i = 0; i < 4; i++) {
+                int newY = y + dirY[i];
+                int newX = x +dirX[i];
+                if (map[newY][newX] && visited[newY][newX] == false) {
+                    dfs(newY, newX);
+                }
+            }
 
+        }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        T = Integer.parseInt(st.nextToken());
-        for (int i = 0; i < T; i++) {
-            st = new StringTokenizer(br.readLine());
-            M = Integer.parseInt(st.nextToken());
-            N = Integer.parseInt(st.nextToken());
-            K = Integer.parseInt(st.nextToken());
 
-            map = new boolean[MAX][MAX];
-            visited = new boolean[MAX][MAX];
+        T =Integer.parseInt(br.readLine());
 
-            //1. 맵정보 반영
-            for (int j = 0; j < K; j++) {
-                st = new StringTokenizer(br.readLine());
-                int x = Integer.parseInt(st.nextToken());
-                int y = Integer.parseInt(st.nextToken());
-                map[x + 1][y + 1] = true;
 
-            }
-            //2. dfs 수정
-            for (int k = 1; k <= N; k++) {
-                for (int j = 1; j <= M; j++) {
-                    if (map[i][j] == true && visited[i][j] == false) {
-                        answer++;
-                        dfs(k, j);
-                    }
+
+
+        while (T-->0){
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                int M=Integer.parseInt(st.nextToken());
+                int N = Integer.parseInt(st.nextToken());
+                int K = Integer.parseInt(st.nextToken());
+
+                map = new boolean[MAX][MAX];
+                visited = new boolean[MAX][MAX];
+                //맵정보
+                for (int i = 0; i < K; i++) {
+                    st= new StringTokenizer(br.readLine());
+                    int x = Integer.parseInt(st.nextToken());
+                    int y = Integer.parseInt(st.nextToken());
+
+                    map[y+1][x+1]=true;
+
                 }
 
+            //dfs
+            int answer = 0;
+            for (int i = 1; i <= N; i++) {
+                for (int j = 1; j <= M  ; j++) {
+                    if(map[i][j]&&visited[i][j]==false){
+                        answer++;
+                        dfs(i,j);
+
+                }
             }
+                    }
+
             bw.write(String.valueOf(answer));
             bw.newLine();
+
+
         }
-    }}
+        bw.flush();
+        bw.close();
+
+    }
+
+
+}
