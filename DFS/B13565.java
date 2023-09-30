@@ -20,7 +20,25 @@ public class B13565 {
     static int[] dirY = {-1, 1, 0, 0};
     static int[] dirX = {0, 0, -1, 1};
 
-    public static void main(String[] args) throws IOException {
+    static void dfs(int y, int x) {
+        if (y == N) {
+            answer = true;
+            return;
+        }
+
+        visited[y][x] = true;
+        for (int i = 0; i < 4; i++) {
+            int newY = y + dirY[i];
+            int newX = x + dirX[i];
+
+            if (map[newY][newX] && visited[newY][newX] == false) {
+                dfs(newY, newX);
+            }
+        }
+    }
+
+
+        public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -53,25 +71,9 @@ public class B13565 {
             System.out.print("NO");
     }
 
-    static void dfs(int y, int x) {
-        if (y == N) {
-            answer = true;
-            return;
-        }
-
-        visited[y][x] = true;
-        for (int i = 0; i < 4; i++) {
-            int newY = y + dirY[i];
-            int newX = x + dirX[i];
-
-            if (map[newY][newX] && visited[newY][newX] == false) {
-                dfs(newY, newX);
-            }
-        }
-
 
 
     }
 
-}
+
 
