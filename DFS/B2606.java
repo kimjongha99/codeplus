@@ -1,7 +1,9 @@
 package DFS;
 
 
+import java.io.*;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /*
 https://www.acmicpc.net/problem/2606
@@ -10,42 +12,51 @@ https://www.acmicpc.net/problem/2606
 
  */
 public class B2606 {
-    static  boolean [][] graph;
+    final  static  int MAX =100+10;
+
+    static  boolean [][] map;
     static  boolean [] visited;
     static  int N,M;
     static  int answer;
-    public  static  void dfs(int idx){
+
+    static  void  dfs(int idx) {
+        visited[idx] =true;
         answer++;
-        visited[idx]= true;
 
-    }
-
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-
-        //컴퓨터수
-        int N = sc.nextInt();
-
-        //컴퓨터 쌍의 수
-        int M = sc.nextInt();
-
-        //그래프의 수
-        graph =new boolean[N+1][N+1];
-        //방문수
-        visited = new boolean[N+1];
-
-        //1. 그래프 정보 입력.
-        int x,y;
-        for (int i = 0; i < M; i++) {
-            x=sc.nextInt();
-            y= sc.nextInt();
-            graph[x][y] = graph[y][x] = true;
+        for (int i = 1; i <= N; i++) {
+            if (map[idx][i] && visited[i] == false) {
+                dfs(i);
+            }
         }
 
-        //2. dfs 출력
-        dfs(1);
-        System.out.println(answer-1  );
     }
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        N= Integer.parseInt(br.readLine());
+        M = Integer.parseInt(br.readLine());
+
+        map= new boolean[MAX][MAX];
+        visited = new boolean[MAX];
+
+        for (int i = 0; i < M; i++) {
+            StringTokenizer st  = new StringTokenizer(br.readLine());
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+
+            map[x][y] = map[y][x] =true;
+
+        }
+
+        dfs(1);
+
+
+        bw.write(String.valueOf(answer-1));
+
+        bw.close();
+        br.close();
+
+    }
 }

@@ -10,13 +10,13 @@ import java.util.StringTokenizer;
 public class B24479 {
     static  int MAX =100000+10;
     static ArrayList<Integer> graph[] ;
-
+    static  ArrayList<Integer> queue[];
     static  boolean visited[];
 
     static  int N,M,R;
 
     static  int answer[];
-    static  int order;
+    static  int order=0;
 
     public static  void dfs(int idx){
         visited[idx]=true;
@@ -67,8 +67,11 @@ public class B24479 {
         }
         //3.dfs호출
         dfs(R);
+        bw.newLine();
+        //4.bfs 출력
+        dfs(R);
 
-        //출력
+
 
         for (int i = 1; i <= N; i++) {
            bw.write(String.valueOf(answer[i]));

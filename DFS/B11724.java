@@ -11,55 +11,50 @@ https://www.acmicpc.net/problem/11724
 
  */
 public class B11724 {
-    static  boolean graph[][];
-    static  boolean visited[];
 
-   static int N,M;
-    static  int answer;
+    final  static  int MAX =1000+10;
+    static  int N,M, answer=0;
 
-    static void dfs(int idx) {
-        visited[idx] = true;
+    static boolean [][] map;
+    static  boolean [] visited;
+
+    static  void  dfs(int idx){
+        visited[idx]=true;
         for (int i = 1; i <= N; i++) {
-            if (visited[i] == false && graph[idx][i]) {
+            if (map[idx][i] && visited[i]==false) {
                 dfs(i);
             }
         }
 
     }
-        public static void main(String[] args) throws IOException {
-        //1.입력초기화
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-        StringTokenizer st = new StringTokenizer(bf.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
-        M= Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
-        //1. 그래프 연결정보주기
-        //그래프의 수
-        graph =new boolean[N+1][N+1];
-        //방문수
-        visited = new boolean[N+1];
-        //1. 그래프 정보 입력.
-        for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(bf.readLine());
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-            graph[x][y] = graph[y][x] = true;
+
+        map = new boolean[MAX][MAX];
+        visited = new boolean[MAX];
+        for(int i=0; i<M; i++){
+            st = new StringTokenizer(br.readLine());
+            int u = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+            map[u][v] =map[v][u] =true;
         }
 
-        //2. dfs 코드작성
         for (int i = 1; i <= N; i++) {
-            if(!visited[i]) {
+            if (visited[i]==false) {
                 dfs(i);
                 answer++;
             }
         }
 
+
         bw.write(String.valueOf(answer));
-        bw.flush();
         bw.close();
-    }
+        br.close();
 
-
     }
+}
