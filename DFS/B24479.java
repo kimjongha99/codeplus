@@ -1,6 +1,9 @@
 package DFS;
 
 
+/*
+알고리즘 수업 - 깊이 우선 탐색 1 성공
+ */
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,77 +11,66 @@ import java.util.StringTokenizer;
 
 
 public class B24479 {
-    static  int MAX =100000+10;
-    static ArrayList<Integer> graph[] ;
-    static  ArrayList<Integer> queue[];
-    static  boolean visited[];
+    final static  int MAX =100000+10;
 
-    static  int N,M,R;
+    static ArrayList<Integer> [] map;
+    static  boolean [] visited;
+    static  int [] answer;
 
-    static  int answer[];
-    static  int order=0;
-
+    static  int  N,M,R;
+    static  int order ;
     public static  void dfs(int idx){
         visited[idx]=true;
         answer[idx]=order;
         order++;
 
-        for (int i = 0; i < graph[idx].size(); i++) {
-            int next = graph[idx].get(i);
+        for (int i = 0; i < map[idx].size(); i++) {
+            int next = map[idx].get(i);
             if(visited[next] == false)
-             dfs(next);
+                dfs(next);
 
         }
     }
-
-
     public static void main(String[] args) throws IOException {
-        //입력초기화
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(bf.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
         N = Integer.parseInt(st.nextToken());
-        M =  Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
         R = Integer.parseInt(st.nextToken());
 
-        //1.그래프에 연결정보채우기
 
-        graph =  new ArrayList[MAX];
+        map = new ArrayList[MAX];
         for (int i = 1; i <= N; i++) {
-             graph[i]=new ArrayList<>();
-
+            map[i]= new ArrayList<>();
         }
         visited = new boolean[MAX];
-        answer =new int[MAX];
-        order =1;
+        answer = new int[MAX];
+        order=1;
 
         for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(bf.readLine());
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-            graph[x].add(y);
-            graph[y].add(x);
+            st = new StringTokenizer(br.readLine());
+            int u = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+            map[u].add(v);
+            map[v].add(u);
         }
 
-        //2.오름차순정렬
         for (int i = 1; i <= N; i++) {
-            Collections.sort(graph[i]);
+            Collections.sort(map[i]);
         }
-        //3.dfs호출
-        dfs(R);
-        bw.newLine();
-        //4.bfs 출력
+
         dfs(R);
 
 
-
         for (int i = 1; i <= N; i++) {
-           bw.write(String.valueOf(answer[i]));
-           bw.newLine();
+            bw.write(String.valueOf(answer[i]));
+            bw.newLine();
         }
 
         bw.flush();
         bw.close();
     }
-}
+    }
+
