@@ -22,31 +22,49 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=2&co
 
  */
 public class S1859 {
-    public static void main(String[] args) throws Exception {
+        public static void main(String[] args) throws IOException {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
             int T = Integer.parseInt(br.readLine());
 
-            for (int t = 0; t < T; t++) {
+
+            for (int tc = 1; tc <= T; tc++) {
                 int N = Integer.parseInt(br.readLine());
-                StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-                long[] prices = new long[N];
+                int arr[] = new int[N];
+
+
+                StringTokenizer st = new StringTokenizer(br.readLine());
                 for (int i = 0; i < N; i++) {
-                    prices[i] = Long.parseLong(st.nextToken());
+                    arr[i]= Integer.parseInt(st.nextToken());
                 }
 
-                long maxPriceSoFar = prices[N - 1];
-                long profit = 0;
+                long ans = 0;
 
-                // 마지막 날부터 역순으로 계산
-                for (int i = N - 2; i >= 0; i--) {
-                    if (prices[i] > maxPriceSoFar) { // 현재 가격이 지금까지의 최대 가격보다 높으면, 최대 가격 갱신
-                        maxPriceSoFar = prices[i];
-                    } else { // 현재 가격이 지금까지의 최대 가격보다 작거나 같으면, 사재기 진행(판매-구입)
-                        profit += maxPriceSoFar - prices[i];
+
+                //맨마지막날짜부터  즉 배열의 마지막 인덱스부터 0번인덱스까지
+                for(int i=N-1; i>=0; i--){
+                    int j = i-1;
+                    int temp=0;
+
+                    while (j >= 0 && arr[i] > arr[j]) {
+                        temp += arr[i];
+
+                        temp -= arr[j];
+
+                        j--;
                     }
+
+                    ans+= temp;
+
+                    i=j+1;
+
                 }
 
-                System.out.println( (t+1) + " " + profit);
+                bw.write("#" + tc + " " + ans);
+                bw.newLine();
             }
+            bw.close();
+            br.close();
+
         }
 }
