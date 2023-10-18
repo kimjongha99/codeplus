@@ -17,14 +17,14 @@ public class B2577 {
         int A =Integer.parseInt(br.readLine());
         int B =Integer.parseInt(br.readLine());
         int C =Integer.parseInt(br.readLine());
-
         String  ans= String.valueOf(A*B*C);
         int arr[] = new int[10];
 
 
         for (int i = 0; i < ans.length(); i ++) {
-            char st = ans.charAt(i);
-            arr[st-48]++;  // 아스키 코드 상  문자 - 48, ex) 문자 48 - 48은 0
+          char num = ans.charAt(i);
+          arr[num-48]++;
+            // 아스키 코드 상  문자 - 48, ex) 문자 48 - 48은 0
         }
 
         for (int i = 0; i < 10; i++) {
