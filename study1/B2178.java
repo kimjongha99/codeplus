@@ -1,3 +1,57 @@
+package  study1;
+
+
+//https://www.acmicpc.net/problem/2178
+//미로 탐색
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+public class B2178 {
+    static int[] dx = {0, 1, 0, -1};  // x축 이동
+    static int[] dy = {1, 0, -1, 0};  // y출 이동
+
+    static boolean visited[][];
+    static int[][] A;
+    static int N;
+    static int M;
+
+    static void bfs() {
+
+    }
+
+            public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        A = new int[N + 10][M + 10];
+        visited = new boolean[N + 10][M + 10];
+        for (int i = 1; i <= N; i++) {
+            String str = br.readLine();
+            for (int j = 1; j <= M; j++) {
+                A[i][j] = str.charAt(j - 1) - '0';
+            }
+        }
+
+        System.out.println();
+
+    }
+}
+
+
+
+
+
+
+
+
+// dfs 풀이
 //package study1;
 //
 //import java.io.BufferedReader;
@@ -17,36 +71,34 @@
 //public class B2178 {
 //    static  int N ,M;
 //
-//
 //    static  int max = 100+10;
 //    static  int map[][];
 //    static  boolean visited[][];
-//
 //    static  int dirY[]={-1,1,0,0};
 //    static int dirX[] = {0, 0, -1, 1};
 //
-//    static void dfs(int y, int x) {
-//        visited[y][x]=true;
-//        for (int i = 0; i < 4; i++) {
-//            int newY = y + dirY[i]+1;
-//            int newX = x + dirX[i]+1;
+//    static  int min=99999;
 //
-//            if (newY < 0 || newY >= N || newX < 0 || newY >= N) {
-//                continue;
-//            }
-//            if (visited[newY][newX] == false && map[newY][newX] == 1) {
-//                map[newY][newX]=map[y][x] + 1;
-//                dfs(y,x);
+//    static void dfs(int y, int x, int count) {
 //
-//            }else {
-//                if (map[newY][newX] > 1 && map[newY][newX] > map[y][x] + 1) {
-//                    map[newY][newX]= map[y][x]+1;
-//                    dfs(newY,newX);
-//                }
-//            }
-//
+//        if(y == N && x == M) { // Check if it reaches the destination
+//            min = Math.min(count , min);
+//            return;
 //        }
 //
+//        visited[y][x]=true;
+//
+//        for (int i = 0; i < 4; i++) {
+//            int newY = y + dirY[i];
+//            int newX = x + dirX[i];
+//
+//            if (newY > 0 && newY <= N && newX > 0 && newX <= M &&
+//                    map[newY][newX] == 1 && !visited[newY][newX]) {
+//                dfs(newY,newX,count+1);
+//                visited[newY][newX] = false; // Backtrack
+//
+//            }
+//        }
 //    }
 //
 //    public static void main(String[] args) throws IOException {
@@ -65,10 +117,12 @@
 //                map[i][j]= s.charAt(j-1)-'0';
 //            }
 //        }
-//        //BFS 실행. 나는1,1에 저장했기때문에 1,1부터 시장
-//        dfs(1,1);
+//        dfs(1, 1, 1); // Start DFS from the beginning of the maze
 //
-//        System.out.println(map[N][M]);
+//
+//
+//        System.out.println(min);
+//
 ////
 ////        String x = "9";
 ////        System.out.println(x.charAt(0)-'0'); // 문자로표현된 숫자를 정수로바ㅆ뀔떄
