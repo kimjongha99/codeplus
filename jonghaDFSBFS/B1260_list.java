@@ -1,9 +1,7 @@
 package jonghaDFSBFS;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class B1260_list {
     static int N, M, V;
@@ -25,6 +23,32 @@ public class B1260_list {
             dfs(y);
         }
     }
+    static  void bfs(int V){
+        visit = new boolean[N+1];
+
+        Queue<Integer> queue = new LinkedList<>();
+
+        // start 를 que에 넣어줌
+        queue.add(V);
+        visit[V]= true;
+
+        while (queue.isEmpty() == false) {
+            int x = queue.poll();
+            System.out.print(x+" ");
+
+            for (int i = 0; i < adj[x].size(); i++) {
+                int y = adj[x].get(i);
+                if(visit[y]==true)continue;
+
+                queue.add(y);
+
+                visit[y]=true;
+            }
+
+
+        }
+
+    }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -36,7 +60,7 @@ public class B1260_list {
         adj = new ArrayList[N+1];
         visit =new boolean[N+1];
 
-        for (int i = 1;i <= N; i++)
+        for (int i = 0;i <= N; i++)
             adj[i] = new ArrayList<>();
 
 
@@ -54,5 +78,7 @@ public class B1260_list {
         }
 
         dfs(V);
+        System.out.println();
+        bfs(V);
     }
 }
