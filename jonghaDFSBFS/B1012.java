@@ -37,7 +37,7 @@ public class B1012 {
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedRead`er br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         T = Integer.parseInt(st.nextToken());
