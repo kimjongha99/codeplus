@@ -1,51 +1,57 @@
 package study2;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class B10451 {
 
-    static  int [] map;
-    static  boolean[] visited;
-    static  int cycle;
+    static int[] graph;
+    static boolean[] visited;
+    static int cycle;
+
+    static  void  dfs(int i){
+        visited[i]= true;
+
+
+        if (visited[graph[i]] == false) {
+            dfs(graph[i]);
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int T = Integer.parseInt(br.readLine());
+        int t = Integer.parseInt(br.readLine());
 
-        for (int t = 0; t < T; t++) {
-
+        for (int tc = 0; tc < t; tc++) {
             int N = Integer.parseInt(br.readLine());
-            map= new int[N+10];
-            visited = new boolean[N+10];
-            cycle = 0; // reset cycle counter for each test case
 
-            StringTokenizer st = new StringTokenizer(br.readLine()); // read the entire line of numbers
-            for (int i = 1; i <= N; i++) { // start loop from 1
-                map[i] = Integer.parseInt(st.nextToken());
+            graph = new int[N + 10];
+            visited = new boolean[N + 10];
+            cycle =0;
+
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for (int i = 1; i <= N; i++) {
+                graph[i] = Integer.parseInt(st.nextToken());
             }
-
 
             for (int i = 1; i <= N; i++) {
                 if (visited[i] == false) {
                     dfs(i);
                     cycle++;
                 }
+
             }
-            System.out.println(cycle);
+
+            bw.write(String.valueOf(cycle));
+            bw.newLine();
         }
 
+        bw.close();
+        br.close();
 
-    }
 
-     static void dfs(int i) {
-        visited[i]= true;
 
-         if (visited[map[i]] == false) {
-             dfs(map[i]);
-         }
     }
 }
