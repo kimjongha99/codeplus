@@ -21,15 +21,38 @@ public class B2178 {
     static int N;
     static int M;
 
-    static void bfs() {
+    static void bfs(int y, int x) {
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{x, y, 1});
+        visited[y][x] = true;
 
+        while (!queue.isEmpty()) {
+            int[] current = queue.poll();
+
+            if (current[0] == M && current[1] == N) {
+                System.out.println(current[2]);
+                return;
+            }
+
+            for (int i = 0; i < 4; i++) {
+                int nx = current[0] + dx[i];
+                int ny = current[1] + dy[i];
+                int ncount = current[2] + 1;
+
+                if (nx > 0 && nx <= M && ny > 0 && ny <= N && !visited[ny][nx] && A[ny][nx] == 1) {
+                    visited[ny][nx] = true;
+                    queue.add(new int[]{nx, ny, ncount});
+                }
+            }
+        }
     }
 
-            public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+
         A = new int[N + 10][M + 10];
         visited = new boolean[N + 10][M + 10];
         for (int i = 1; i <= N; i++) {
@@ -39,7 +62,8 @@ public class B2178 {
             }
         }
 
-        System.out.println();
+        bfs(1,1);
+
 
     }
 }
