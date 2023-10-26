@@ -1,7 +1,10 @@
 package SwExpertAcademy;
 
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /*
 https://swexpertacademy.com/main/solvingProblem/solvingProblem.do
@@ -21,32 +24,34 @@ View
  */
 public class S1206 {
     public static void main(String args[]) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        int T;
-        T=sc.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        for(int test_case = 1; test_case <= T; test_case++){
-            int buildingNum = sc.nextInt();
-            int [] buildings = new int[buildingNum];
-            int answer = 0;
 
-            for (int i = 0; i < buildings.length; i++) {
-                buildings[i] = sc.nextInt();
+        for(int test_case = 1; test_case <= 10; test_case++){
+            int N = Integer.parseInt(br.readLine().trim());
+            int arr[] = new int[N];
+
+
+            StringTokenizer st  = new StringTokenizer(br.readLine());
+            for (int i = 0; i < N; i++) {
+                arr[i] = Integer.parseInt(st.nextToken());
             }
 
-            for (int i = 2; i < buildings.length - 2; i++) {
-                int checkL = Math.max(buildings[i-1], buildings[i-2]);
-                int checkR = Math.max(buildings[i+1], buildings[i+2]);
+            int totalView = 0;
+            for (int i = 2; i < N - 2; i++) {
+                int currentHeight = arr[i];
+                int maxSurroundingHeight = Math.max(
+                        Math.max(arr[i-2], arr[i-1]),
+                        Math.max(arr[i+1], arr[i+2]));
 
-                if (buildings[i] < checkL || buildings[i] < checkR) {
-                    continue;
+                int view = currentHeight - maxSurroundingHeight;
+
+                if (view > 0) {
+                    totalView+=view;
+                }
                 }
 
-                int views = Math.max(checkL, checkR);
-                answer += buildings[i] - views;
-            }
-
-            System.out.println("#" + test_case + " " + answer);
+            System.out.println("#" + test_case + " " + totalView);
         }
     }
 }
