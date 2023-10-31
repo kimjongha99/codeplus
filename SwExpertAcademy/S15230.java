@@ -17,22 +17,29 @@ public class S15230 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tc = Integer.parseInt(br.readLine());
 
-        char[] arr = new char[26];
 
-        for (int i = 0; i < 26; i++) {
-            arr[i] = (char)('a' + i);
-        }
-
-
-        System.out.println(arr[3]);
         for (int t = 1; t <= tc; t++) {
 
+            String str = br.readLine();
 
-
-
+            System.out.println("#"+t+" "+countStr(str));
 
         }
 
     }
+
+     static int countStr(String str) {
+         String alphabet = "abcdefghijklmnopqrstuvwxyz";
+         int count= 0;
+
+         for (int i = 0; i < str.length(); i++) {
+             if (str.charAt(i) == alphabet.charAt(i)) {
+                 count++;
+             }else {
+                 break;
+             }
+         }
+         return  count;
+     }
 
 }
