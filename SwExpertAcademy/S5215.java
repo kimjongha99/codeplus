@@ -13,45 +13,64 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=3&co
 햄버거 다이어트
  */
 public class S5215 {
+    static  int N; //햄버거수
+    static  int L; // 제한 칼로리수
+    static  int [][] data;  // 맛점수 , 칼로리 배열
+    static  boolean [] sel; // 선택조합 배열
+    static  int ans; // 최댓값
+
+    static void  dfs(int idx, int score, int cal){  //깊이,맛점수 , 칼로리
+        if (cal > L) {  //칼로리가 L을초과하면 리턴
+            return;
+        }
+        //모든 재료를 고려했다면, 필요한 최대 점수갱신
+        if (idx == N) {
+            ans = Math.max(ans,score);
+            return;
+        }
+        sel[idx]=true;
+        dfs(idx + 1, score + data[idx][0], cal + data[idx][1]);
+        // 현재 재료를 제외
+        sel[idx] = false;
+        dfs(idx + 1, score, cal);
+    }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken()); // Number of ingredients
-        int L = Integer.parseInt(st.nextToken()); // Calorie limit
 
-        int[] tasteScores = new int[N];
-        int[] calories = new int[N];
+        for (int t = 1; t <= T; t++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
-        for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine());
-            tasteScores[i] = Integer.parseInt(st.nextToken()); // Taste score of the ingredient
-            calories[i] = Integer.parseInt(st.nextToken());    // Calorie of the ingredient
-        }
+            N = Integer.parseInt(st.nextToken());
+            L = Integer.parseInt(st.nextToken());
 
-        int answer = getMaxTasteScore(N, L, tasteScores, calories);
-        System.out.println(answer);
-    }
-
-    private static int getMaxTasteScore(int N, int L, int[] tasteScores, int[] calories) {
-        // Initialize DP table
-        int[][] dp = new int[N + 1][L + 1];
-
-        // Build the table bottom up
-        for (int i = 1; i <= N; i++) {
-            for (int w = 0; w <= L; w++) {
-                if (calories[i - 1] <= w) {
-                    // If we can include the current ingredient
-                    dp[i][w] = Math.max(tasteScores[i - 1] + dp[i - 1][w - calories[i - 1]], dp[i - 1][w]);
-                } else {
-                    // If we can't include the current ingredient
-                    dp[i][w] = dp[i - 1][w];
-                }
+            data = new int[N][2];
+            for (int i = 0; i < N; i++) {
+                st = new StringTokenizer(br.readLine());
+                data[i][0] = Integer.parseInt(st.nextToken());
+                data[i][1] = Integer.parseInt(st.nextToken());
             }
-        }
 
-        // The last cell of the table will have the maximum taste score
-        return dp[N][L];
+            sel= new boolean[N];
+            ans=0;//최댓값
+            dfs(0,0,0);
+            System.out.println("#"+t+" "+ans );
+
+
+
+
+
+
+
+
+
+
+
+
+        }
     }
+
+
 }
