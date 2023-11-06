@@ -14,84 +14,73 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=2&co
 public class S1974 {
     static int[][] arr;
 
-    static int findZull(int[][] arr) {
-        int sumZul = 0;
-        for (int y = 0; y < arr.length; y++) {
-            for (int x = 0; x < arr[y].length; x++) {
-                sumZul += arr[y][x];
-            }
-        }
 
-        if (sumZul == 405) {
-            return 1;
-        } else
-            return 0;
-    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-    static int findHang(int[][] arr) {
-        int sumHang = 0;
-        for (int x = 0; x < arr.length; x++) {
-            for (int y = 0; y < arr[x].length; y++) {
-                sumHang += arr[y][x];
-            }
-        }
-        if (sumHang == 405) {
-            return 1;
-        } else
-            return 0;
-    }
+        int tc = Integer.parseInt(st.nextToken());
 
-    static boolean findThree(int[][] arr) {
-        for (int y = 0; y < 9; y += 3) {
-            for (int x = 0; x < 9; x += 3) {
-                boolean[] blockCheck = new boolean[9];
-                for (int i = y; i < y + 3; i++) {
-                    for (int j = x; j < x + 3; j++) {
-                        if (arr[i][j] < 1 || arr[i][j] > 9 || blockCheck[arr[i][j] - 1]) {
-                            return false;
-                        }
-                        blockCheck[arr[i][j] - 1] = true;
-                    }
+        for (int T = 1; T <= tc; T++) {
+
+            arr = new int[9][9];
+
+            for (int y = 0; y < 9; y++) {
+                st = new StringTokenizer(br.readLine());
+                for (int x = 0; x < 9; x++) {
+                    int num = Integer.parseInt(st.nextToken());
+
+                    arr[y][x] = num;
                 }
             }
-        }
 
-        return true;
-    }
+                boolean isSudoku = true;
+                for (int i = 0; i < 9; i++) {
+                    boolean[] rowCheck = new boolean[9];
+                    boolean[] colCheck = new boolean[9];
 
-            public static void main (String[]args) throws IOException {
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                StringTokenizer st = new StringTokenizer(br.readLine());
-
-                int tc = Integer.parseInt(st.nextToken());
-
-                for (int T = 1; T <= tc; T++) {
-
-                    arr = new int[9][9];
-
-                    for (int i = 0; i < 9; i++) {
-                        st = new StringTokenizer(br.readLine());
-                        for (int j = 0; j < 9; j++) {
-                            int num = Integer.parseInt(st.nextToken());
-                            arr[i][j] = num;
+                    for (int j = 0; j < 9; j++) {
+                        // Check row
+                        if (rowCheck[arr[i][j] - 1]) {
+                            isSudoku = false;
+                            break;
                         }
-
+                        rowCheck[arr[i][j] - 1] = true;
+                        // Check column
+                        if (colCheck[arr[j][i] - 1]) {
+                            isSudoku = false;
+                            break;
+                        }
+                        colCheck[arr[j][i] - 1] = true;
                     }
 
-                    int hanZull = findZull(arr);
-
-                    int hanhHang = findHang(arr);
-
-                    boolean threeThree = findThree(arr);
-
-                    if (hanZull == hanhHang == threeThree) {
-                        System.out.println("1");
-                    }else System.out.println("0");
-
+                    if (!isSudoku) break;
                 }
+
+                // Check 3x3 grids
+                for (int row = 0; row < 9; row += 3) {
+                    for (int col = 0; col < 9; col += 3) {
+                        if (!isSudoku) break;
+
+                        boolean[] gridCheck = new boolean[9];
+                        for (int r = row; r < row + 3; r++) {
+                            for (int c = col; c < col + 3; c++) {
+                                if (gridCheck[arr[r][c] - 1]) {
+                                    isSudoku = false;
+                                    break;
+                                }
+                                gridCheck[arr[r][c] - 1] = true;
+                            }
+                            if (!isSudoku) break;
+                        }
+                    }
+                    if (!isSudoku) break;
+                }
+            System.out.println("#" + T + " " + (isSudoku ? 1 : 0));
+
             }
         }
-
+    }
 
 /*
 2차원배열값보기
