@@ -2,6 +2,7 @@ package SwExpertAcademy;
 
 
 import java.io.*;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /*
@@ -11,58 +12,51 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=2&co
 
  */
 public class S2001 {
-    static  int [][] arr;//배열
+    static  int [][] arr;
 
-    static  int  max;
-    static int N;
-    static int M;
-static void getMax(int x, int y){
-    int sum=0;
-    for(int i = x; i < x + M; i++){
-        for(int j = y; j < y + M; j++){
-            sum += arr[i][j];
-        }
-    }
-    if(max < sum)
-        max = sum;
-}
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int tc = Integer.parseInt(st.nextToken());
 
-        int TC = Integer.parseInt(st.nextToken());
-
-        for (int t = 0; t < TC; t++) {
+        for (int t = 1; t <= tc; t++) {
             st = new StringTokenizer(br.readLine());
+            int N = Integer.parseInt(st.nextToken());
+            int M = Integer.parseInt(st.nextToken());
 
-             N= Integer.parseInt(st.nextToken());
-             M = Integer.parseInt(st.nextToken());
+            arr= new int[N+5][N+5];
 
-            arr= new int[N][N];
 
-            for(int i=0; i<N; i++) {
+            for (int i = 0; i < N; i++) {
                 st = new StringTokenizer(br.readLine());
-                for(int j=0; j<N; j++) {
+                for (int j = 0; j < N; j++) {
                     arr[i][j] = Integer.parseInt(st.nextToken());
                 }
-                    }
-            max = 0;
-            // 모든 경우의 수 구하기
-            for(int i = 0; i <= N - M; i++){
-                for(int j = 0; j <= N-M; j++){
-                    getMax(i,j);
-
-                }
-
             }
-            System.out.println("#" + t +1 + " " + max);
+
+            int maxFlies = 0;
+
+            for (int i = 0; i <= N - M; i++) {
+                for (int j = 0; j <= N - M; j++) {
+
+                    int sum=0;
+                    for (int k = 0; k < M; k++) {
+                        for (int h = 0; h < M; h++) {
+                            sum += arr[i+k][j+h];
+                        }
+                    }
+                    maxFlies = Math.max(sum,maxFlies);
+                }
+            }
+
+            System.out.println("#"+t+" "+maxFlies);
 
         }
 
 
     }
-}
+    }
+
 /*
 2차원배열값보기
    for(int i=0; i<arr.length; i++) {

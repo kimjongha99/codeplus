@@ -1,17 +1,54 @@
 package study1;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 
 /*
 https://www.acmicpc.net/problem/11328
 Strfry
+
+영어 소문자 = a - 97
  */
 public class B11328 {
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int T = Integer.parseInt(br.readLine());
+        for (int t = 0; t < T; t++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            String word1 = st.nextToken();
+            String word2 = st.nextToken();
+
+            int arr[] = new int[26];
+
+            for (int i = 0; i < word1.length(); i++) {
+                int c = word1.charAt(i);
+                arr[c-97]++;   //아스키를 인트로했을시
+            }
+
+            for (int i = 0; i < word2.length(); i++) {
+                char c= word2.charAt(i);
+                arr[c-'a']--;  //아스키를char로했을시
+            }
+
+
+            boolean isPossible=true;
+
+            for(int i=0; i<arr.length;i++) {
+                if(arr[i]!=0) {
+                    isPossible=false;
+                    break;
+                }
+            }
+
+            if(isPossible)
+                System.out.println("Possible");
+            else
+                System.out.println("Impossible");
+
+
+            }
 
 
 

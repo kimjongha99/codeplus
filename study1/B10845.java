@@ -1,4 +1,4 @@
-package QueueStack;
+package study1;
 
 
 import java.io.BufferedReader;

@@ -12,7 +12,7 @@ https://www.acmicpc.net/problem/16173
 
  */
 public class B16173 {
-    final static  int MAX =3+110;
+    final static  int MAX =100;
     static int map[][];
     static  boolean visited[][];
     static  int N;
@@ -30,6 +30,7 @@ public class B16173 {
             int newX = x + dirX[i]*map[y][x];
             if(visited[newY][newX]==false){
                 dfs(newY,newX);
+
             }
 
         }

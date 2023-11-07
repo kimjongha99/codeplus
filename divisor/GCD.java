@@ -22,3 +22,5 @@ public class GCD {
         System.out.println(lcm(10,15));
     }
 }
+
+
