@@ -41,11 +41,13 @@ public class S1974 {
 
                     for (int j = 0; j < 9; j++) {
                         // Check row
-                        if (rowCheck[arr[i][j] - 1]) {
-                            isSudoku = false;
-                            break;
-                        }
-                        rowCheck[arr[i][j] - 1] = true;
+                            if (rowCheck[arr[i][j] - 1]) {
+                                isSudoku = false;
+                                break;
+                            }
+                            rowCheck[arr[i][j] - 1] = true;
+
+
                         // Check column
                         if (colCheck[arr[j][i] - 1]) {
                             isSudoku = false;
@@ -54,28 +56,30 @@ public class S1974 {
                         colCheck[arr[j][i] - 1] = true;
                     }
 
-                    if (!isSudoku) break;
+                    if (isSudoku==false) break;
                 }
 
                 // Check 3x3 grids
-                for (int row = 0; row < 9; row += 3) {
-                    for (int col = 0; col < 9; col += 3) {
+                for (int y = 0; y < 9; y += 3) {
+                    for (int x = 0; x < 9; x += 3) {
                         if (!isSudoku) break;
 
                         boolean[] gridCheck = new boolean[9];
-                        for (int r = row; r < row + 3; r++) {
-                            for (int c = col; c < col + 3; c++) {
-                                if (gridCheck[arr[r][c] - 1]) {
+                        for (int ny = y; ny < y + 3; ny++) {
+                            for (int nx = x; nx < x + 3; nx++) {
+                                if (gridCheck[arr[nx][ny] - 1]) {
                                     isSudoku = false;
                                     break;
                                 }
-                                gridCheck[arr[r][c] - 1] = true;
+                                gridCheck[arr[nx][ny] - 1] = true;
                             }
                             if (!isSudoku) break;
                         }
                     }
                     if (!isSudoku) break;
                 }
+
+
             System.out.println("#" + T + " " + (isSudoku ? 1 : 0));
 
             }
