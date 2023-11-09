@@ -33,8 +33,10 @@ public class S1959 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int tc = Integer.parseInt(br.readLine());
+
         for (int t = 1; t <= tc; t++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
+
             int A = Integer.parseInt(st.nextToken());
             int B = Integer.parseInt(st.nextToken());
 
