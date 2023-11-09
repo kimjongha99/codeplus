@@ -15,23 +15,34 @@ public class S1948 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tc = Integer.parseInt(br.readLine());
+        StringTokenizer st ;
 
         for (int t = 1; t <= tc; t++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+             st = new StringTokenizer(br.readLine());
             int month = Integer.parseInt(st.nextToken());
             int day = Integer.parseInt(st.nextToken());
             int nextMonth = Integer.parseInt(st.nextToken());
             int nextDay = Integer.parseInt(st.nextToken());
 
 
-            int duration
+            int[] dayInMonth = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            int ans =0;
 
+            if (month == nextMonth) {
+                ans = nextDay-day+1;
+            }else{
+                int dayOne = dayInMonth[month]-day;
+                int dayEnd = nextDay;
 
-
-
-
-
+                for (int m = month+1; m < nextMonth; m++) {
+                    ans += dayInMonth[m];
+                }
+                ans += dayOne + dayEnd + 1; // 시작일과 종료일을 포함하기 위해 +1
+            }
+            System.out.println("#" + t + " " + ans);
 
         }
+        br.close();
+
     }
 }
