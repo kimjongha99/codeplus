@@ -5,8 +5,7 @@ import java.util.StringTokenizer;
 
 /*
 
-https://swexpertacademy.com/main/solvingProblem/solvingProblem.do
-
+https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV13zo1KAAACFAYh&categoryId=AV13zo1KAAACFAYh&categoryType=CODE&problemTitle=1204&orderBy=FIRST_REG_DATETIME&selectCodeLang=ALL&select-1=&pageSize=10&pageIndex=1
 1204. [S/W 문제해결 기본] 1일차 - 최빈수 구하기
 
  */
