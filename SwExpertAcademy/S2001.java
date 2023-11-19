@@ -36,8 +36,8 @@ public class S2001 {
 
             int maxFlies = 0;
 
-            for (int i = 0; i <= N - M; i++) {
-                for (int j = 0; j <= N - M; j++) {
+            for (int i = 0; i < N - M-1; i++) {
+                for (int j = 0; j < N - M-1; j++) {
 
                     int sum=0;
                     for (int k = 0; k < M; k++) {
