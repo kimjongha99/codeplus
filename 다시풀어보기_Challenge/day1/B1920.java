@@ -1,4 +1,4 @@
-package 다시풀어보기_Challenge;
+package 다시풀어보기_Challenge.day1;
 
 import java.io.*;
 import java.util.*;
