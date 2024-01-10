@@ -39,14 +39,8 @@ public class leetcode200 {
                             if (nx >= 0 && nx < rows && ny >= 0 && ny < cols && grid2[nx][ny] == '1') {
                                 stack.push(new int[]{nx,ny});
                             }
-
                         }
-
-
-
                     }
-
-
                 }
             }
         }
