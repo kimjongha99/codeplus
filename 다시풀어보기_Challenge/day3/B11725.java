@@ -18,11 +18,11 @@ public class B11725 {
     static  int N;
 
     static  void  dfs(int idx) {
-        visited[idx]=true;
-        for (int i = 0; i < graph[idx].size(); i++) {
-            int next = graph[idx].get(i);
-            if (visited[next] == false) {
-                ans[next] =idx;
+        visited[idx]=true; //방문인덱스 true
+        for (int i = 0; i < graph[idx].size(); i++) {  // graph의 idx 사이즈 만큼 반복
+            int next = graph[idx].get(i);  // 다음 현재인덱스값을 꺼내서
+            if (visited[next] == false) { // 방문을안했다면
+                ans[next] =idx;  //ans인덱스의  현재인덱스를 넣으면 부모인덱스를 넣은것과같은효과
                 dfs(next);
             }
         }
